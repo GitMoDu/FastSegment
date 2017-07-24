@@ -17,12 +17,9 @@ bool FastSegment::Setup(const uint8_t dataPin, const uint8_t clockPin, const uin
 		ShiftPin = shiftPin;
 		DigitCount = digitCount;
 
-
 		Data.Setup(DataPin, LOW);
 		Shift.Setup(ShiftPin, HIGH);
 		Clock.Setup(ClockPin, HIGH);
-
-		Active.Setup(LED_BUILTIN, LOW);
 
 		Reset();
 		Clear();
@@ -198,12 +195,12 @@ void FastSegment::Reset()
 
 void FastSegment::SetAll(const bool value)
 {
-	Active.PulseHigh();
+	//ActiveLed.PulseHigh();
 
 	SetHead(value);
 	for (uint8_t i = 0; i < DigitCount; i++)
 	{
-		Active.PulseHigh();
+		//ActiveLed.PulseHigh();
 		for (uint8_t j = 0; j < BYTE_SIZE; j++)
 		{
 			Clock.PulseLow();
@@ -218,7 +215,7 @@ void FastSegment::Clear()
 
 void FastSegment::SetHead(const bool value)
 {
-	Active.PulseHigh();
+	//ActiveLed.PulseHigh();
 
 	Data.Set(value);
 
@@ -227,7 +224,7 @@ void FastSegment::SetHead(const bool value)
 
 void FastSegment::Push(const uint8_t times)
 {
-	Active.PulseHigh();
+	//ActiveLed.PulseHigh();
 
 	for (uint8_t i = 0; i < times; i++)
 	{
@@ -238,7 +235,7 @@ void FastSegment::Push(const uint8_t times)
 
 void FastSegment::WriteByte(const byte value)
 {
-	Active.PulseHigh();
+	//ActiveLed.PulseHigh();
 
 	for (int i = 0; i < BYTE_SIZE; i++)
 	{

@@ -15,15 +15,12 @@
 class FastSegment
 {
 private:
-
-
 #define SEGMENT_ERROR B10101010//Error
-
-
 
 	uint8_t DataPin, ClockPin, ShiftPin, DigitCount;
 
-	FastShifter Clock, Shift, Active;
+	FastShifter Clock, Shift;
+	//FastShifter ActiveLed;
 	FastOut Data;
 
 	uint32_t TenPower(const uint8_t power);
