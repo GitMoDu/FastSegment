@@ -7,11 +7,12 @@
 #include "FastSegment.h"
 
 #define DIGIT_COUNT 3
-#define DEMO_REFRESH_PERIOD_MILLIS 10
+#define DEMO_REFRESH_PERIOD_MILLIS 20
+#define DEMO_MAX_RPM 500
 
-#define SERIAL_DATA_PIN		  5 //SDD  || Serial data input    || SER
-#define REGISTER_CLOCK_PIN  6 //SCLK || Register clock		   || RCLK
-#define REGISTER_SHIFT_PIN	7 //LOAD || Shift register clock || SRCLK
+#define SERIAL_DATA_PIN		0 //SDD  || Serial data input    || SER
+#define REGISTER_CLOCK_PIN  2 //SCLK || Register clock		   || RCLK
+#define REGISTER_SHIFT_PIN	1 //LOAD || Shift register clock || SRCLK
 
 
 FastSegment SegmentDriver;
@@ -23,27 +24,18 @@ void Demo()
 		SegmentDriver.Clear();
 		delay(1000);
 
-		for (uint32_t i = 0; i < 30000l; i += 100l)
+		for (uint16_t i = 0; i <= DEMO_MAX_RPM; i++)
 		{
-			if (i > 100 && i < 150)
-			{
-				i += 30;
-			}
-			else if (i > 150 && i < 200)
-			{
-				i += 15;
-			}
-
-			int Number = i / 100;
-
-			if (SegmentDriver.SetNumber(Number))
+			if (SegmentDriver.SetNumber(i))
 			{
 				SegmentDriver.ShowNumber();
-				Serial.println(Number);
-			}		
+				Serial.println(i);
+			}	
 
 			delay(DEMO_REFRESH_PERIOD_MILLIS);
 		}
+
+		delay(1000);
 	}
 }
 
