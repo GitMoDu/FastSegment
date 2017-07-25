@@ -69,8 +69,9 @@ public:
 	//Set all digits to the same value.
 	void SetDigitsAll(const byte value);
 
-	//Show the digits set from the set number.
-	void ShowNumber();
+	//Show the digits set from the set number. 
+	//Clear the screen before if clearBefore == true .
+	void ShowNumber(const bool clearBefore = false);
 
 	//Set the digits from the number, omitting the leftmost zeros by default.
 	//Returns true if the number has changed since last time.

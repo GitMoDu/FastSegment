@@ -91,8 +91,13 @@ void FastSegment::ShowBytes(byte byteArray[], byte byteArraySize)
 	Shift.PulseLow();
 }
 
-void FastSegment::ShowNumber()
+void FastSegment::ShowNumber(const bool clearBefore)
 {
+	if (clearBefore)
+	{
+		Clear();
+	}
+	
 	ShowBytes(Digits, DigitCount);
 }
 
