@@ -7,7 +7,7 @@
 
 #include "FastSegment.h"
 
-bool FastSegment::Setup(const byte dataPin, const byte clockPin, const byte shiftPin, const byte digitCount)
+bool FastSegment::Setup(const uint8_t dataPin, const uint8_t clockPin, const uint8_t shiftPin, const uint8_t digitCount)
 {
 	if (dataPin < NUM_DIGITAL_PINS
 		&& clockPin < NUM_DIGITAL_PINS
@@ -34,14 +34,14 @@ bool FastSegment::Setup(const byte dataPin, const byte clockPin, const byte shif
 	}
 }
 
-byte FastSegment::GetLastNumber()
+uint8_t FastSegment::GetLastNumber()
 {
 	return LastNumber;
 }
 
-void FastSegment::SetDigitsAll(const byte value)
+void FastSegment::SetDigitsAll(const uint8_t value)
 {
-	for (byte i = 0; i < DigitCount; i++)
+	for (uint8_t i = 0; i < DigitCount; i++)
 	{
 		Digits[i] = value;
 	}
@@ -54,11 +54,11 @@ bool FastSegment::SetNumber(const uint32_t number, const bool replaceZero)
 	{
 		LastNumber = number;
 
-		byte IntValue;
+		uint8_t IntValue;
 		bool ReachedMSD = false;
-		for (char i = DigitCount - 1; i >= 0; i--)
+		for (int8_t i = DigitCount - 1; i >= 0; i--)
 		{
-			IntValue = ((number / TenPower((byte)i)) % 10);
+			IntValue = ((number / TenPower((uint8_t)i)) % 10);
 
 			if (!ReachedMSD)
 			{
@@ -71,7 +71,7 @@ bool FastSegment::SetNumber(const uint32_t number, const bool replaceZero)
 			}
 			else
 			{
-				Digits[i] = SEGMENT_CLEAR;
+				Digits[i] = (uint8_t)SEGMENT_CLEAR;
 			}
 		}
 		return true;
@@ -82,9 +82,9 @@ bool FastSegment::SetNumber(const uint32_t number, const bool replaceZero)
 	}
 }
 
-void FastSegment::ShowBytes(byte byteArray[], byte byteArraySize)
+void FastSegment::ShowBytes(uint8_t byteArray[], uint8_t byteArraySize)
 {
-	for (byte i = 0; i < byteArraySize; i++)
+	for (uint8_t i = 0; i < byteArraySize; i++)
 	{
 		WriteByte(byteArray[i]);
 	}
@@ -113,7 +113,7 @@ void FastSegment::Reset()
 void FastSegment::SetAll(const bool bitValue)
 {
 	Data.Set(bitValue);
-	for (byte i = 0; i < DigitCount * BYTE_SIZE; i++)
+	for (uint8_t i = 0; i < DigitCount * BYTE_SIZE; i++)
 	{
 		Clock.PulseLow();
 	}
@@ -132,7 +132,7 @@ void FastSegment::SetHead(const bool value)
 	Data.Set(LOW);
 }
 
-void FastSegment::WriteByte(const byte value)
+void FastSegment::WriteByte(const uint8_t value)
 {
 	for (int i = 0; i < BYTE_SIZE; i++)
 	{
@@ -140,7 +140,7 @@ void FastSegment::WriteByte(const byte value)
 	}
 }
 
-uint32_t FastSegment::TenPower(const byte power)
+uint32_t FastSegment::TenPower(const uint8_t power)
 {
 	switch (power)
 	{
@@ -171,7 +171,7 @@ uint32_t FastSegment::TenPower(const byte power)
 	}
 }
 
-byte FastSegment::GetDigitByte(const byte number0to9, const bool decimalOn)
+uint8_t FastSegment::GetDigitByte(const uint8_t number0to9, const bool decimalOn)
 {
 	if (number0to9 > 9)
 	{

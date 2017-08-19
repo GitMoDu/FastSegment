@@ -63,12 +63,12 @@ public:
 #define SEGMENT_CLEAR  B11111111
 #define SEGMENT_ALL_ON B00000000
 
-	byte Digits[MAX_DIGIT_COUNT];
+	uint8_t Digits[MAX_DIGIT_COUNT];
 	
-	bool Setup(const byte dataPin, const byte clockPin, const byte shiftPin, const byte digitCount);
+	bool Setup(const uint8_t dataPin, const uint8_t clockPin, const uint8_t shiftPin, const uint8_t digitCount);
 
 	//Set all digits to the same value.
-	void SetDigitsAll(const byte value);
+	void SetDigitsAll(const uint8_t value);
 
 	//Show the digits set from the set number. 
 	//Clear the screen before if clearBefore == true .
@@ -79,19 +79,20 @@ public:
 	bool SetNumber(const uint32_t number, const bool replaceZero = true);
 
 	//Get the last set number.
-	byte GetLastNumber();
+	uint8_t GetLastNumber();
 
 	//Set all outputs to the same bit value
 	void SetAll(const bool bitValue);
 
 	//Display the bytes in the provided array
-	void ShowBytes(byte byteArray[], byte byteArraySize);
+	void ShowBytes(uint8_t byteArray[], uint8_t byteArraySize);
 
 	//Translate single digit value to representation in a 7-segment byte.
-	byte GetDigitByte(const byte number1to9, const bool decimalOn = false);
+	uint8_t GetDigitByte(const uint8_t number1to9, const bool decimalOn = false);
 
 	//Clear display
 	void Clear();
+
 };
 
 #endif
