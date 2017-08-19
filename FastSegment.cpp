@@ -62,7 +62,7 @@ bool FastSegment::SetNumber(const uint32_t number, const bool replaceZero)
 
 			if (!ReachedMSD)
 			{
-				ReachedMSD = IntValue > 0;
+				ReachedMSD = IntValue > 0 || i == 0;
 			}
 
 			if (ReachedMSD)
