@@ -173,10 +173,6 @@ uint32_t FastSegment::TenPower(const uint8_t power)
 
 uint8_t FastSegment::GetDigitByte(const uint8_t number0to9, const bool decimalOn)
 {
-	if (number0to9 > 9)
-	{
-		return SEGMENT_ERROR;
-	}
 	if (decimalOn)
 	{
 		switch (number0to9)
@@ -201,6 +197,8 @@ uint8_t FastSegment::GetDigitByte(const uint8_t number0to9, const bool decimalOn
 			return SEGMENT_8D;
 		case 9:
 			return SEGMENT_9D;
+		default:
+			return SEGMENT_ERROR;
 		}
 	}
 	else
@@ -227,6 +225,8 @@ uint8_t FastSegment::GetDigitByte(const uint8_t number0to9, const bool decimalOn
 			return SEGMENT_8;
 		case 9:
 			return SEGMENT_9;
+		default:
+			return SEGMENT_ERROR;
 		}
 	}
 }
