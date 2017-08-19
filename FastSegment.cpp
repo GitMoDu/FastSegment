@@ -79,7 +79,7 @@ bool FastSegment::SetNumber(const uint32_t number, const bool replaceZero)
 	else
 	{
 		return false;
-	}	
+	}
 }
 
 void FastSegment::ShowBytes(byte byteArray[], byte byteArraySize)
@@ -98,7 +98,7 @@ void FastSegment::ShowNumber(const bool clearBefore)
 	{
 		Clear();
 	}
-	
+
 	ShowBytes(Digits, DigitCount);
 }
 
@@ -115,7 +115,7 @@ void FastSegment::SetAll(const bool bitValue)
 	Data.Set(bitValue);
 	for (byte i = 0; i < DigitCount * BYTE_SIZE; i++)
 	{
-			Clock.PulseLow();
+		Clock.PulseLow();
 	}
 	Data.Set(LOW);
 	Shift.PulseLow();
