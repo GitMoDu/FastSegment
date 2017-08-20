@@ -48,9 +48,9 @@ void FastSegment::SetDigitsAll(const uint8_t value)
 }
 
 
-bool FastSegment::SetNumber(const uint32_t number, const bool replaceZero)
+bool FastSegment::SetNumber(const uint32_t number, const bool forceUpdate, const bool replaceZero)
 {
-	if (number != LastNumber)
+	if (forceUpdate || number != LastNumber)
 	{
 		LastNumber = number;
 

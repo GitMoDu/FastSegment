@@ -76,7 +76,7 @@ public:
 
 	//Set the digits from the number, omitting the leftmost zeros by default.
 	//Returns true if the number has changed since last time.
-	bool SetNumber(const uint32_t number, const bool replaceZero = true);
+	bool SetNumber(const uint32_t number, const bool forceUpdate, const bool replaceZero = true);
 
 	//Get the last set number.
 	uint8_t GetLastNumber();

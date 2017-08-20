@@ -26,7 +26,7 @@ void Demo()
 
 		for (uint16_t i = 0; i <= DEMO_MAX_RPM; i++)
 		{
-			if (SegmentDriver.SetNumber(i))
+			if (SegmentDriver.SetNumber(i, false))
 			{
 				SegmentDriver.ShowNumber();
 				Serial.println(i);
@@ -44,6 +44,7 @@ void setup() {
 	Serial.begin(9600);
 
 	SegmentDriver.Setup(SERIAL_DATA_PIN, REGISTER_CLOCK_PIN, REGISTER_SHIFT_PIN, DIGIT_COUNT);
+	SegmentDriver.SetNumber(0, false);
 
 	Demo();
 }
