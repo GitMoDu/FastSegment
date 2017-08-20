@@ -18,19 +18,19 @@ class FastSegment
 private:
 #define SEGMENT_ERROR B10101010
 
-	byte DataPin, ClockPin, ShiftPin, DigitCount;
+	uint32_t DataPin, ClockPin, ShiftPin, DigitCount;
 
 	FastOut Data;
 	FastShifter Clock, Shift;
 
-	byte LastNumber = 0;
+	uint32_t LastNumber = 0;
 
 	void SetHead(const bool value);
 	void Reset();
-	void WriteByte(const byte value);	
+	void WriteByte(const uint8_t value);	
 
 	//Equivalent to 10^power up to 10 power but much, much faster.
-	uint32_t TenPower(const byte power);
+	uint32_t TenPower(const uint8_t power);
 
 public:
 
