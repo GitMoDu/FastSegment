@@ -10,7 +10,11 @@
 #include <Arduino.h>
 #include <Fast.h>
 
-#define MAX_DIGIT_COUNT 10
+#ifndef MAX_SEGMENT_DIGIT_COUNT
+#define MAX_SEGMENT_DIGIT_COUNT 10
+#endif // !MAX_SEGMENT_DIGIT_COUNT
+
+
 #define BYTE_SIZE 8
 
 class FastSegment
@@ -63,7 +67,7 @@ public:
 #define SEGMENT_CLEAR  B11111111
 #define SEGMENT_ALL_ON B00000000
 
-	uint8_t Digits[MAX_DIGIT_COUNT];
+	uint8_t Digits[MAX_SEGMENT_DIGIT_COUNT];
 	
 	bool Setup(const uint8_t dataPin, const uint8_t clockPin, const uint8_t shiftPin, const uint8_t digitCount);
 
