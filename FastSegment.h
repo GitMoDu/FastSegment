@@ -34,7 +34,8 @@ private:
 	void WriteByte(const uint8_t value);	
 
 	//Equivalent to 10^power up to 10 power but much, much faster.
-	uint32_t TenPower(const uint8_t power);
+	uint16_t TenPower16(const uint8_t power);
+	uint32_t TenPower32(const uint8_t power);
 
 public:
 
@@ -81,6 +82,8 @@ public:
 	//Set the digits from the number, omitting the leftmost zeros by default.
 	//Returns true if the number has changed since last time.
 	bool SetNumber(const uint32_t number, const bool forceUpdate, const bool replaceZero = true);
+
+	bool SetNumber(const uint16_t number, const bool forceUpdate, const bool replaceZero = true);
 
 	//Get the last set number.
 	uint8_t GetLastNumber();

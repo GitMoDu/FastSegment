@@ -47,6 +47,39 @@ void FastSegment::SetDigitsAll(const uint8_t value)
 	}
 }
 
+bool FastSegment::SetNumber(const uint16_t number, const bool forceUpdate, const bool replaceZero)
+{
+	if (forceUpdate || number != LastNumber)
+	{
+		LastNumber = number;
+
+		uint8_t IntValue;
+		bool ReachedMSD = false;
+		for (int8_t i = DigitCount - 1; i >= 0; i--)
+		{
+			IntValue = ((number / TenPower16((uint8_t)i)) % 10);
+
+			if (!ReachedMSD)
+			{
+				ReachedMSD = IntValue > 0 || i == 0;
+			}
+
+			if (ReachedMSD)
+			{
+				Digits[i] = GetDigitByte(IntValue);
+			}
+			else
+			{
+				Digits[i] = (uint8_t)SEGMENT_CLEAR;
+			}
+		}
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 
 bool FastSegment::SetNumber(const uint32_t number, const bool forceUpdate, const bool replaceZero)
 {
@@ -58,7 +91,7 @@ bool FastSegment::SetNumber(const uint32_t number, const bool forceUpdate, const
 		bool ReachedMSD = false;
 		for (int8_t i = DigitCount - 1; i >= 0; i--)
 		{
-			IntValue = ((number / TenPower((uint8_t)i)) % 10);
+			IntValue = ((number / TenPower32((uint8_t)i)) % 10);
 
 			if (!ReachedMSD)
 			{
@@ -140,7 +173,26 @@ void FastSegment::WriteByte(const uint8_t value)
 	}
 }
 
-uint32_t FastSegment::TenPower(const uint8_t power)
+uint16_t FastSegment::TenPower16(const uint8_t power)
+{
+	switch (power)
+	{
+	case 0:
+		return (uint16_t)1;
+	case 1:
+		return (uint16_t)10;
+	case 2:
+		return (uint16_t)100;
+	case 3:
+		return (uint16_t)1000;
+	case 4:
+		return (uint16_t)10000;
+	default:
+		return (uint16_t)0;
+	}
+}
+
+uint32_t FastSegment::TenPower32(const uint8_t power)
 {
 	switch (power)
 	{
