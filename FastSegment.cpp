@@ -52,7 +52,7 @@ bool FastSegment::SetNumber(const uint16_t number, const bool forceUpdate, const
 	if (forceUpdate || number != LastNumber)
 	{
 		LastNumber = number;
-
+		NeedsRefresh = true;
 		uint8_t IntValue;
 		bool ReachedMSD = false;
 		for (int8_t i = DigitCount - 1; i >= 0; i--)
@@ -86,7 +86,7 @@ bool FastSegment::SetNumber(const uint32_t number, const bool forceUpdate, const
 	if (forceUpdate || number != LastNumber)
 	{
 		LastNumber = number;
-
+		NeedsRefresh = true;
 		uint8_t IntValue;
 		bool ReachedMSD = false;
 		for (int8_t i = DigitCount - 1; i >= 0; i--)
@@ -121,18 +121,21 @@ void FastSegment::ShowBytes(uint8_t byteArray[], uint8_t byteArraySize)
 	{
 		WriteByte(byteArray[i]);
 	}
-
 	Shift.PulseLow();
 }
 
 void FastSegment::ShowNumber(const bool clearBefore)
 {
-	if (clearBefore)
+	if (NeedsRefresh)
 	{
-		Clear();
-	}
+		if (clearBefore)
+		{
+			Clear();
+		}
 
-	ShowBytes(Digits, DigitCount);
+		ShowBytes(Digits, DigitCount);
+		NeedsRefresh = false;
+	}
 }
 
 void FastSegment::Reset()

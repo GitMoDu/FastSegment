@@ -29,6 +29,8 @@ private:
 
 	uint32_t LastNumber = 0;
 
+	bool NeedsRefresh = true;
+
 	void SetHead(const bool value);
 	void Reset();
 	void WriteByte(const uint8_t value);	
